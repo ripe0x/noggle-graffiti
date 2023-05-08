@@ -45,17 +45,12 @@ const Stats = ({ graffitiData, textColor }: Props) => {
     if (array.length < 2) {
       return 0;
     }
-
     const filteredList = array.filter((graffiti) => +graffiti.slot >= 6160716);
-    console.log(filteredList);
     const timesBetween = filteredList.map((graffiti, i) => {
       if (i === array.length - 1) return 0;
       return +array[i].slot - +array[i + 1].slot;
     });
-    console.log(timesBetween);
-
     const average = timesBetween.reduce((a, b) => a + b) / timesBetween.length;
-    console.log(average);
 
     return average;
   }

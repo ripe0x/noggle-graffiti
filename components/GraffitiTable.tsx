@@ -1,9 +1,6 @@
 "use client"; // this is a client component 👈🏽
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
-import axios from "axios";
 import cx from "classnames";
-import { truncate } from "@/lib/utils";
 import { Graffiti } from "@/lib/types";
 type Props = {
   textColor?: string;
