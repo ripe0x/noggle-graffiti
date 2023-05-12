@@ -1,6 +1,35 @@
 import cx from "classnames";
 import GraffitiTable from "@/components/GraffitiTable";
 import Stats from "@/components/Stats";
+import { ResolvingMetadata, Metadata } from "next";
+
+type Props = {
+  params: { id: string };
+};
+
+// export async function generateMetadata(
+//   { params }: Props,
+//   parent?: ResolvingMetadata,
+// ): Promise<Metadata> {
+//   // read route params
+//   const id = params.id;
+
+//   return {
+//     title: "⌐◨-◨ Nouns slot graffiti × ETH solo staking",
+//     description:
+//       "We see solo staking as something incredibly nounish. It embodies a desire to contribute to the production and maintenance of a public good (in this case Ethereum’s decentralization) with the optimistic view that individuals’ independent judgment and actions can make a difference.",
+//     twitter: {
+//       card: "summary_large_image",
+//       title: "⌐◨-◨ Nouns slot graffiti × ETH solo staking",
+//       description:
+//         "We see solo staking as something incredibly nounish. It embodies a desire to contribute to the production and maintenance of a public good (in this case Ethereum’s decentralization) with the optimistic view that individuals’ independent judgment and actions can make a difference.",
+//       creator: "@nounsdao",
+//     },
+//     metadataBase: new URL("https://nogglesgraffiti.wtf"),
+//     themeColor: "#FFF",
+//   };
+// }
+
 
 async function getData() {
   const res = await fetch("https://noggles-graffiti.up.railway.app/slots");
@@ -37,7 +66,7 @@ export default async function Home() {
         </div>
         <div className="w-full py-8 text-center text-4xl">
           <h1 className={cx("font-mono text-xl", textColor)}>
-            Nouns block graffiti &times; ETH solo staking
+            Nouns slot graffiti &times; ETH solo staking
           </h1>
         </div>
         {horizontalRule}
@@ -47,7 +76,7 @@ export default async function Home() {
         {horizontalRule}
         <div className="my-8">
           <h2 className={cx("mb-3 text-xl font-bold", textColor)}>
-            Latest noggle blocks
+            Latest noggle slot
           </h2>
           <GraffitiTable graffitiData={graffitiData} textColor={textColor} />
         </div>

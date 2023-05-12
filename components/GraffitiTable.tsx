@@ -25,7 +25,7 @@ const GraffitiTable = ({ graffitiData, textColor }: Props) => {
               textColor,
             )}
           >
-            <th className="w-[20%] text-start md:w-[10%]">block</th>
+            <th className="w-[20%] text-start md:w-[10%]">slot</th>
             <th className="w-[30%] text-start md:w-[18%]">validator</th>
             <th className="w-[200px] text-start md:w-[40%]">graffiti</th>
           </tr>
@@ -56,8 +56,8 @@ const GraffitiTable = ({ graffitiData, textColor }: Props) => {
                   </a>
                   <span className="block text-[10px] font-normal leading-none opacity-60">
                     {stakerScore(graffitiData, graffiti.proposerId)} tagged
-                    block
-                    {stakerScore(graffitiData, graffiti.proposerId) > 1 && "s"}
+                    slot
+                    {stakerScore(graffitiData, graffiti.proposerId) !== 1 && "s"}
                   </span>
                 </td>
                 <td className={cx("w-[200px] md:w-[40%]", textColor)}>

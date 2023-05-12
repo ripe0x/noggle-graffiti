@@ -17,6 +17,7 @@ export const metadata = {
   },
   metadataBase: new URL("https://nogglesgraffiti.wtf"),
   themeColor: "#FFF",
+  icons: new URL("https://nogglesgraffiti.wtf/favicon.ico"),
 };
 
 export default async function RootLayout({

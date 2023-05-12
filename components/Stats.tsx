@@ -26,7 +26,7 @@ const Stats = ({ graffitiData, textColor }: Props) => {
 
   const stats = [
     {
-      label: "noggle graffiti blocks",
+      label: "noggle graffiti slot",
       value: graffitiData.length,
     },
     {
@@ -34,7 +34,7 @@ const Stats = ({ graffitiData, textColor }: Props) => {
       value: uniqueStakers.length,
     },
     {
-      label: "avg blocks between noggles",
+      label: "avg slot between noggles",
       value: Math.trunc(calculateAverageTime(graffitiData)).toLocaleString(
         "en-US",
       ),
