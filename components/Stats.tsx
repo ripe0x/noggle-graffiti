@@ -1,43 +1,73 @@
-"use client"; // this is a client component 👈🏽
-import React, { useEffect, useState } from "react";
+// "use client"; // this is a client component 👈🏽
+import React, { use, useEffect, useState } from "react";
 import cx from "classnames";
 import { Graffiti } from "@/lib/types";
 import CountUp from "react-countup";
 
 type Props = {
-  graffitiData: Graffiti[];
+  statsData: {
+    slots: {
+      total: {
+        count: string;
+      },
+      monthly: {
+        count: string;
+        percentage: number;
+      },
+      weekly: {
+        count: string;
+        percentage: number;
+      },
+      daily: {
+        count: string;
+        percentage: number;
+      },
+    },
+    validators: {
+      total: {
+        count: string;
+      }
+    }
+  }
   textColor?: string;
 };
 
-const Stats = ({ graffitiData, textColor }: Props) => {
-  const [uniqueStakers, setUniqueStakers] = useState<string[]>([]);
 
-  useEffect(() => {
-    let stakers: string[] = [];
-    if (graffitiData) {
-      graffitiData.map((graffiti) => {
-        if (!stakers.includes(graffiti.proposerId)) {
-          stakers.push(graffiti.proposerId);
-        }
-      });
-    }
-    setUniqueStakers(stakers);
-  }, [graffitiData]);
+const Stats = ({ statsData, textColor }: Props) => {
+  // const [uniqueStakers, setUniqueStakers] = useState<string[]>([]);
+  // const [statsData, setStatsData] = useState<any>(null);
+
+
+  // useEffect(() => {
+  //   getStatsData().then((data) => setStatsData(data));
+
+  // }, []);
+
+  // console.log(statsData);
+  // useEffect(() => {
+  //   let stakers: string[] = [];
+  //   if (graffitiData) {
+  //     graffitiData.map((graffiti: { proposerId: string; }) => {
+  //       if (!stakers.includes(graffiti.proposerId)) {
+  //         stakers.push(graffiti.proposerId);
+  //       }
+  //     });
+  //   }
+  //   setUniqueStakers(stakers);
+  // }, [graffitiData]);
 
   const stats = [
     {
-      label: "noggle graffiti slot",
-      value: graffitiData.length,
+      label: "noggle graffiti blocks",
+      value: statsData.slots.total.count,
     },
     {
       label: "validator graffiti artists",
-      value: uniqueStakers.length,
+      value: statsData.validators.total.count,
     },
     {
-      label: "avg slot between noggles",
-      value: Math.trunc(calculateAverageTime(graffitiData)).toLocaleString(
-        "en-US",
-      ),
+      label: "percentage of blocks (past 7 days)",
+      value: `${statsData.slots.weekly.percentage.toFixed(2)}%`,
     },
   ];
 
@@ -63,7 +93,8 @@ const Stats = ({ graffitiData, textColor }: Props) => {
           key={i}
         >
           <span className="text-4xl font-bold">
-            <CountUp end={+value} />
+            {/* <CountUp end={+value} /> */}
+            {value}
           </span>
           <span className="font-mono text-sm font-normal">{label}</span>
         </div>

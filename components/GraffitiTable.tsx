@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import cx from "classnames";
 import { Graffiti } from "@/lib/types";
+import { truncate, truncateAddress } from "@/lib/utils";
 type Props = {
   textColor?: string;
   graffitiData?: Graffiti[];
@@ -25,8 +26,8 @@ const GraffitiTable = ({ graffitiData, textColor }: Props) => {
               textColor,
             )}
           >
-            <th className="w-[20%] text-start md:w-[10%]">slot</th>
-            <th className="w-[30%] text-start md:w-[18%]">validator</th>
+            <th className="w-[20%] text-start md:w-[10%]">block</th>
+            <th className="w-[30%] text-start">validator address</th>
             <th className="w-[200px] text-start md:w-[40%]">graffiti</th>
           </tr>
         </thead>
@@ -46,18 +47,23 @@ const GraffitiTable = ({ graffitiData, textColor }: Props) => {
                     {graffiti.slot}
                   </a>
                 </td>
-                <td className={cx("w-[30%] font-bold md:w-[18%]", textColor)}>
+                <td className={cx("w-[30%] font-bold", textColor)}>
                   <a
                     href={`https://beaconcha.in/validator/${graffitiData[0].proposerId}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {graffiti.proposerId}
+
+                    {graffiti.feeRecipient ? truncateAddress(graffiti.feeRecipient, 6) : graffiti.proposerId}
+
                   </a>
                   <span className="block text-[10px] font-normal leading-none opacity-60">
                     {stakerScore(graffitiData, graffiti.proposerId)} tagged
-                    slot
+                    block
                     {stakerScore(graffitiData, graffiti.proposerId) !== 1 && "s"}
+                    {!graffiti.feeRecipient && (
+                      <span className="mt-1 block text-[10px] font-normal italic leading-none opacity-60">no fee recipient. proposer ID displayed instead</span>
+                    )}
                   </span>
                 </td>
                 <td className={cx("w-[200px] md:w-[40%]", textColor)}>
