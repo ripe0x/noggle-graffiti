@@ -50,7 +50,6 @@ async function getStats() {
 export default async function Home() {
   const graffitiData = await getData();
   const statsData = await getStats();
-  console.log(statsData);
   const primaryColor = "#344B75";
   const bgColor = "bg-[#EFEFFA]";
   const textColor = `text-[#344B75]`;

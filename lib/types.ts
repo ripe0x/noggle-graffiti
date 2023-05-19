@@ -1,4 +1,5 @@
 export type Graffiti = {
+  block: string;
   feeRecipient: string;
   id: number;
   graffiti: string;

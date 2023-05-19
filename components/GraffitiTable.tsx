@@ -1,8 +1,8 @@
 "use client"; // this is a client component 👈🏽
-import React, { useEffect, useState } from "react";
+import React from "react";
 import cx from "classnames";
 import { Graffiti } from "@/lib/types";
-import { truncate, truncateAddress } from "@/lib/utils";
+import { truncateAddress } from "@/lib/utils";
 type Props = {
   textColor?: string;
   graffitiData?: Graffiti[];
@@ -40,23 +40,32 @@ const GraffitiTable = ({ graffitiData, textColor }: Props) => {
               >
                 <td className={cx("w-[20%] md:w-[10%]", textColor)}>
                   <a
-                    href={`https://beaconcha.in/slot/${graffitiData[0].slot}`}
+                    href={`https://beaconcha.in/block/${graffiti.block}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {graffiti.slot}
+                    {graffiti.block}
                   </a>
                 </td>
                 <td className={cx("w-[30%] font-bold", textColor)}>
-                  <a
-                    href={`https://beaconcha.in/validator/${graffitiData[0].proposerId}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  {graffiti.feeRecipient ? (
+                    <a
+                      href={`https://etherscan.io/address/${graffiti.feeRecipient}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {graffiti.feeRecipient ? truncateAddress(graffiti.feeRecipient, 6) : graffiti.proposerId}
+                    </a>
+                  ) : (
+                    <a
+                      href={`https://beaconcha.in/validator/${graffiti.proposerId}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {graffiti.proposerId}
+                    </a>
+                  )}
 
-                    {graffiti.feeRecipient ? truncateAddress(graffiti.feeRecipient, 6) : graffiti.proposerId}
-
-                  </a>
                   <span className="block text-[10px] font-normal leading-none opacity-60">
                     {stakerScore(graffitiData, graffiti.proposerId)} tagged
                     block
