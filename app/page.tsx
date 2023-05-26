@@ -82,7 +82,7 @@ export default async function Home() {
         {horizontalRule}
         <div className="my-8">
           <h2 className={cx("mb-3 text-xl font-bold", textColor)}>
-            Latest noggle block
+            Latest noggle blocks
           </h2>
           <GraffitiTable graffitiData={graffitiData} textColor={textColor} />
         </div>
