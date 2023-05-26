@@ -25,7 +25,7 @@ const metadata = {
 
 
 async function getData() {
-  const res = await fetch("https://noggles-graffiti.up.railway.app/slots", { next: { revalidate: 60 } });
+  const res = await fetch("https://api.nogglesgraffiti.wtf/slots", { cache: 'no-store' });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -37,7 +37,7 @@ async function getData() {
 
 
 async function getStats() {
-  const res = await fetch("https://api.nogglesgraffiti.wtf/stats", { next: { revalidate: 60 } });
+  const res = await fetch("https://api.nogglesgraffiti.wtf/stats", { cache: 'no-store' });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
