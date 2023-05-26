@@ -84,7 +84,7 @@ export default async function Home() {
           <h2 className={cx("mb-3 text-xl font-bold", textColor)}>
             Latest noggle blocks
           </h2>
-          <GraffitiTable graffitiData={graffitiData} textColor={textColor} />
+          <GraffitiTable graffitiData={graffitiData} textColor={textColor} bgColor={bgColor} />
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <div className="absolute flex w-full flex-col border-t border-gray-200 bg-white font-mono text-sm md:flex-row md:items-center">
-      <div className="px-4 py-4 text-center sm:w-2/3 md:py-4 md:text-left">
+    <div className="flex w-full flex-col border-t border-gray-200 bg-white font-mono text-sm md:flex-row md:items-center md:sticky bottom-0 z-10 justify-between">
+      <div className="px-4 py-2 text-center sm:w-2/3 md:py-2 md:text-left text-xs">
         <p className="text-[#344B75]">
           Funded by <strong>Nouns DAO</strong> via{" "}
           <a
@@ -44,7 +44,7 @@ export default function Footer() {
           </a>
         </p>
       </div>
-      <div className="sm:w-1/3">
+      <div className="sm:w-1/3 max-w-[180px]">
         <img
           src="/brush-noun.jpg"
           alt="Brush Noun after a long day of validating"

@@ -1,4 +1,4 @@
-// "use client"; // this is a client component 👈🏽
+"use client";
 import React, { use, useEffect, useState } from "react";
 import cx from "classnames";
 import { Graffiti } from "@/lib/types";
@@ -26,7 +26,8 @@ type Props = {
     validators: {
       total: {
         count: string;
-      }
+        unique_addresses: string;
+      },
     }
   }
   textColor?: string;
@@ -34,28 +35,6 @@ type Props = {
 
 
 const Stats = ({ statsData, textColor }: Props) => {
-  // const [uniqueStakers, setUniqueStakers] = useState<string[]>([]);
-  // const [statsData, setStatsData] = useState<any>(null);
-
-
-  // useEffect(() => {
-  //   getStatsData().then((data) => setStatsData(data));
-
-  // }, []);
-
-  // console.log(statsData);
-  // useEffect(() => {
-  //   let stakers: string[] = [];
-  //   if (graffitiData) {
-  //     graffitiData.map((graffiti: { proposerId: string; }) => {
-  //       if (!stakers.includes(graffiti.proposerId)) {
-  //         stakers.push(graffiti.proposerId);
-  //       }
-  //     });
-  //   }
-  //   setUniqueStakers(stakers);
-  // }, [graffitiData]);
-
   const stats = [
     {
       label: "noggle graffiti blocks",
@@ -63,11 +42,11 @@ const Stats = ({ statsData, textColor }: Props) => {
     },
     {
       label: "validator graffiti artists",
-      value: statsData.validators.total.count,
+      value: statsData.validators.total.unique_addresses,
     },
     {
       label: "percentage of blocks (past 7 days)",
-      value: `${statsData.slots.weekly.percentage.toFixed(2)}%`,
+      value: `${statsData.slots.weekly.percentage.toFixed(2)}`,
     },
   ];
 
@@ -93,8 +72,13 @@ const Stats = ({ statsData, textColor }: Props) => {
           key={i}
         >
           <span className="text-4xl font-bold">
-            {/* <CountUp end={+value} /> */}
-            {value}
+            {i === 2 && (
+              <><CountUp start={0} end={+value} decimals={2} />%</>
+            )}
+            {i !== 2 && (
+              <><CountUp start={69} end={+value} /></>
+            )}
+
           </span>
           <span className="font-mono text-sm font-normal">{label}</span>
         </div>
