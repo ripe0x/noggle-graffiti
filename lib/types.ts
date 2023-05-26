@@ -5,6 +5,7 @@ export type Graffiti = {
   graffiti: string;
   slot: string;
   proposerId: string;
+  timestamp: string;
   proposer: {
     validator: {
       pubkey: string;
