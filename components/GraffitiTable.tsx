@@ -54,32 +54,21 @@ const GraffitiTable = ({ graffitiData, textColor, bgColor }: Props) => {
                   </a>
                 </td>
                 <td className={cx("w-[20%] md:w-[30%] md:font-bold", textColor)}>
-                  {graffiti.feeRecipient ? (
-                    <a
-                      href={`https://etherscan.io/address/${graffiti.feeRecipient}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="hidden md:block">{graffiti.feeRecipient ? truncateAddress(graffiti.feeRecipient, 6) : graffiti.proposerId}</span>
-                      <span className="md:hidden">{graffiti.feeRecipient ? truncateAddress(graffiti.feeRecipient, 3) : graffiti.proposerId}</span>
-                    </a>
-                  ) : (
-                    <a
-                      href={`https://beaconcha.in/validator/${graffiti.proposerId}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {graffiti.proposerId}
-                    </a>
-                  )}
-
+                  <a
+                    href={`https://etherscan.io/address/${graffiti.feeRecipient}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="hidden md:block">{graffiti.withdrawalAddress ? truncateAddress(graffiti.withdrawalAddress, 6) : truncateAddress(graffiti.feeRecipient, 6)}</span>
+                    <span className="md:hidden">{graffiti.withdrawalAddress ? truncateAddress(graffiti.withdrawalAddress, 3) : truncateAddress(graffiti.feeRecipient, 3)}</span>
+                  </a>
                   <span className="block text-[10px] font-normal leading-none opacity-60">
                     {/* {stakerScore(graffitiData, graffiti.proposerId)} tagged
                     block
                     {stakerScore(graffitiData, graffiti.proposerId) !== 1 && "s"} */}
-                    {!graffiti.feeRecipient && (
+                    {/* {!graffiti.feeRecipient && (
                       <span className="mt-1 block text-[9px] md:text-[10px] font-normal italic leading-none opacity-60">no fee recipient. proposer ID displayed instead</span>
-                    )}
+                    )} */}
                   </span>
                 </td>
                 <td className={cx("w-[60%] md:w-[40%]", textColor)}>

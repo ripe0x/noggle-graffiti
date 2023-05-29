@@ -25,7 +25,7 @@ const metadata = {
 
 
 async function getData() {
-  const res = await fetch("https://api.nogglesgraffiti.wtf/slots", { cache: 'no-store' });
+  const res = await fetch("https://api.nogglesgraffiti.wtf/blocks", { cache: 'no-store' });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
