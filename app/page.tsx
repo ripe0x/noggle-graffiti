@@ -48,7 +48,7 @@ async function getStats() {
 }
 
 export default async function Home() {
-  const graffitiData = await getData();
+  // const graffitiData = await getData();
   const statsData = await getStats();
   const primaryColor = "#344B75";
   const bgColor = "bg-[#EFEFFA]";
@@ -84,7 +84,7 @@ export default async function Home() {
           <h2 className={cx("mb-3 text-xl font-bold", textColor)}>
             Latest noggle blocks
           </h2>
-          <GraffitiTable graffitiData={graffitiData} textColor={textColor} bgColor={bgColor} />
+          <GraffitiTable textColor={textColor} bgColor={bgColor} />
         </div>
       </div>
     </>

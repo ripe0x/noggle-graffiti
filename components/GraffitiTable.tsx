@@ -1,5 +1,5 @@
 "use client"; // this is a client component 👈🏽
-import React from "react";
+import React, { useEffect, useState } from "react";
 import cx from "classnames";
 import { Graffiti } from "@/lib/types";
 import { truncateAddress } from "@/lib/utils";
@@ -8,16 +8,33 @@ import TimeAgo from 'react-timeago'
 type Props = {
   textColor?: string;
   bgColor?: string;
-  graffitiData?: Graffiti[];
+  // graffitiData?: Graffiti[];
 };
 
-const GraffitiTable = ({ graffitiData, textColor, bgColor }: Props) => {
+async function getData() {
+  const res = await fetch("https://api.nogglesgraffiti.wtf/blocks", { cache: 'no-store' });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+const GraffitiTable = ({ textColor, bgColor }: Props) => {
   // const stakerScore = (graffitiData: Graffiti[], proposerId: string) => {
   //   const occurrences = graffitiData.filter(
   //     (graffiti) => graffiti.proposerId === proposerId,
   //   ).length;
   //   return occurrences;
   // };
+  const [data, setData] = useState<Graffiti[]>([]);
+
+  useEffect(() => {
+    const graffitiData = getData();
+    graffitiData.then((data) => setData(data));
+  }, []);
 
   return (
     <div>
@@ -35,8 +52,8 @@ const GraffitiTable = ({ graffitiData, textColor, bgColor }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {graffitiData &&
-            graffitiData.map((graffiti: Graffiti, i) => (
+          {data &&
+            data.map((graffiti: Graffiti, i) => (
               <tr
                 key={i}
                 className="flex w-full flex-row justify-start gap-6 md:gap-8 border-b border-b-[#344B75] py-2 md:py-4 font-mono text-xs md:text-sm"
