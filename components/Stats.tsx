@@ -95,15 +95,15 @@ const Stats = ({ textColor }: Props) => {
   const stats = [
     {
       label: "noggle graffiti blocks",
-      value: statsData?.slots.total.count,
+      value: statsData ? statsData?.slots.total.count : "",
     },
     {
       label: "validator graffiti artists",
-      value: statsData?.validators.total.unique_addresses,
+      value: statsData ? statsData?.validators.total.unique_addresses : "",
     },
     {
       label: "percentage of blocks (past 7 days)",
-      value: `${statsData?.slots.weekly.percentage.toFixed(2)}`,
+      value: statsData ? `${statsData?.slots.weekly.percentage.toFixed(2)}` : '',
     },
   ];
 
