@@ -1,7 +1,7 @@
 import cx from "classnames";
 import GraffitiTable from "@/components/GraffitiTable";
 import Stats from "@/components/Stats";
-import { ResolvingMetadata, Metadata } from "next";
+import { ResolvingMetadata, Metadata, NextPage } from "next";
 
 type Props = {
   params: { id: string };
@@ -47,9 +47,9 @@ async function getStats() {
   return res.json();
 }
 
-export default async function Home() {
+const Home: NextPage = (props) => {
   // const graffitiData = await getData();
-  const statsData = await getStats();
+  // const statsData = await getStats();
   const primaryColor = "#344B75";
   const bgColor = "bg-[#EFEFFA]";
   const textColor = `text-[#344B75]`;
@@ -60,7 +60,7 @@ export default async function Home() {
   );
 
   return (
-    <>
+    <main className="flex min-h-screen w-full flex-col items-center justify-center py-10 md:py-32">
       <div
         className={cx("z-10 w-full max-w-xl px-5 font-mono xl:px-0", bgColor)}
       >
@@ -77,7 +77,7 @@ export default async function Home() {
         </div>
         {horizontalRule}
         <div className="center my-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <Stats statsData={statsData} textColor={textColor} />
+          <Stats textColor={textColor} />
         </div>
         {horizontalRule}
         <div className="my-8">
@@ -87,6 +87,8 @@ export default async function Home() {
           <GraffitiTable textColor={textColor} bgColor={bgColor} />
         </div>
       </div>
-    </>
+    </main>
   );
 }
+
+export default Home;

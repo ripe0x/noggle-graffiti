@@ -1,52 +1,109 @@
-"use client";
 import React, { use, useEffect, useState } from "react";
 import cx from "classnames";
 import { Graffiti } from "@/lib/types";
 import CountUp from "react-countup";
+import useSWR from 'swr'
+import axios from 'axios'
+
+interface StatsData {
+  slots: {
+    total: {
+      count: string;
+    },
+    monthly: {
+      count: string;
+      percentage: number;
+    },
+    weekly: {
+      count: string;
+      percentage: number;
+    },
+    daily: {
+      count: string;
+      percentage: number;
+    },
+  },
+  validators: {
+    total: {
+      count: string;
+      unique_addresses: string;
+    },
+  }
+}
 
 type Props = {
-  statsData: {
-    slots: {
-      total: {
-        count: string;
-      },
-      monthly: {
-        count: string;
-        percentage: number;
-      },
-      weekly: {
-        count: string;
-        percentage: number;
-      },
-      daily: {
-        count: string;
-        percentage: number;
-      },
-    },
-    validators: {
-      total: {
-        count: string;
-        unique_addresses: string;
-      },
-    }
-  }
+  // statsData: {
+  //   slots: {
+  //     total: {
+  //       count: string;
+  //     },
+  //     monthly: {
+  //       count: string;
+  //       percentage: number;
+  //     },
+  //     weekly: {
+  //       count: string;
+  //       percentage: number;
+  //     },
+  //     daily: {
+  //       count: string;
+  //       percentage: number;
+  //     },
+  //   },
+  //   validators: {
+  //     total: {
+  //       count: string;
+  //       unique_addresses: string;
+  //     },
+  //   }
+  // }
   textColor?: string;
 };
+async function getStats() {
+  const res = await fetch("https://api.nogglesgraffiti.wtf/stats", { cache: 'no-store' });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+const Stats = ({ textColor }: Props) => {
+  // const url = 'https://api.nogglesgraffiti.wtf/stats'
+  // const fetcher = (url: string) => axios.get(url).then(res => res.data);
+  // const { data, error } = useSWR("https://api.nogglesgraffiti.wtf/stats", fetcher);
+  // console.log('data', data);
+  const [statsData, setStatsData] = useState<StatsData>();
+
+  // useEffect(() => {
+  //   const statsData = getStats();
+  //   statsData.then((data) => setStatsData(data));
+  // }, []);
+
+  useEffect(() => {
+    fetch('https://api.nogglesgraffiti.wtf/stats')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data', data);
+        setStatsData(data);
+      })
+  }, [])
 
 
-const Stats = ({ statsData, textColor }: Props) => {
   const stats = [
     {
       label: "noggle graffiti blocks",
-      value: statsData.slots.total.count,
+      value: statsData?.slots.total.count,
     },
     {
       label: "validator graffiti artists",
-      value: statsData.validators.total.unique_addresses,
+      value: statsData?.validators.total.unique_addresses,
     },
     {
       label: "percentage of blocks (past 7 days)",
-      value: `${statsData.slots.weekly.percentage.toFixed(2)}`,
+      value: `${statsData?.slots.weekly.percentage.toFixed(2)}`,
     },
   ];
 
@@ -72,11 +129,16 @@ const Stats = ({ statsData, textColor }: Props) => {
           key={i}
         >
           <span className="text-4xl font-bold">
-            {i === 2 && (
-              <><CountUp start={0} end={+value} decimals={2} />%</>
+            {i === 2 && value && (
+              <>
+                {/* <CountUp start={0} end={+value} decimals={2} /> */}
+                {value}%</>
             )}
-            {i !== 2 && (
-              <><CountUp start={69} end={+value} /></>
+            {i !== 2 && value && (
+              <>
+                {/* <CountUp start={69} end={+value} /> */}
+                {value}
+              </>
             )}
 
           </span>

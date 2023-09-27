@@ -1,8 +1,9 @@
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { sfPro, inter } from "./fonts";
 import Footer from "@/components/layout/footer";
+import { AppProps } from "next/app";
+import { useState, useEffect } from "react";
 
 export const metadata = {
   title: "⌐◨-◨ Nouns block graffiti × ETH solo staking",
@@ -20,20 +21,11 @@ export const metadata = {
   icons: new URL("https://nogglesgraffiti.wtf/favicon.ico"),
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function MyApp({ Component, pageProps }: AppProps) {
+
   return (
-    <html lang="en">
-      <body className={cx(sfPro.variable, inter.variable, "bg-[#EFEFFA]")}>
-        <main className="flex min-h-screen w-full flex-col items-center justify-center py-10 md:py-32">
-          {children}
-        </main>
-        <Footer />
-        <Analytics />
-      </body>
-    </html>
+    <Component {...pageProps} />
   );
 }
+
+export default MyApp;
