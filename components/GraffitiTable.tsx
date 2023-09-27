@@ -8,7 +8,6 @@ import TimeAgo from 'react-timeago'
 type Props = {
   textColor?: string;
   bgColor?: string;
-  // graffitiData?: Graffiti[];
 };
 
 async function getData() {
@@ -23,12 +22,6 @@ async function getData() {
 }
 
 const GraffitiTable = ({ textColor, bgColor }: Props) => {
-  // const stakerScore = (graffitiData: Graffiti[], proposerId: string) => {
-  //   const occurrences = graffitiData.filter(
-  //     (graffiti) => graffiti.proposerId === proposerId,
-  //   ).length;
-  //   return occurrences;
-  // };
   const [data, setData] = useState<Graffiti[]>([]);
 
   useEffect(() => {
