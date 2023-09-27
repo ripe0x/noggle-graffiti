@@ -1,6 +1,6 @@
 import "./globals.css";
 import cx from "classnames";
-import { sfPro, inter } from "./fonts";
+import { sfPro, inter } from "../lib/fonts";
 import Footer from "@/components/layout/footer";
 import { AppProps } from "next/app";
 import { useState, useEffect } from "react";
